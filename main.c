@@ -26,7 +26,6 @@ int main(void)
         char *command = read_command();
         char **args = parser(command, &argc);
         execute_command(args, argc, commands, command_count);
-        // FREE----------------------------------
         free_args(args, argc);
         free(command);
     }
