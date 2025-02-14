@@ -317,7 +317,7 @@ void list_of_directory(char **args, int argc)
 {
     const char *start_dir = (argc > 1) ? args[1] : ".";
     printf("%s\n", start_dir);
-    sub_class_of_list_of_directory(start_dir, 0); // Start with depth = 0 automatically
+    sub_class_of_list_of_directory(start_dir, 0);
 }
 void sub_class_of_list_of_directory(const char *dir_path, int depth)
 {
@@ -327,7 +327,7 @@ void sub_class_of_list_of_directory(const char *dir_path, int depth)
     {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
         {
-            continue; // Skip . and ..
+            continue; 
         }
         for (int i = 0; i < depth; i++)
         {
@@ -343,11 +343,10 @@ void sub_class_of_list_of_directory(const char *dir_path, int depth)
         }
         sprintf(full_path, "%s/%s", dir_path, entry->d_name);
 
-        // Check if it's a directory
         struct stat path_status;
         if (stat(full_path, &path_status) == 0 && S_ISDIR(path_status.st_mode))
         {
-            sub_class_of_list_of_directory(full_path, depth + 1); // Automatically increase depth
+            sub_class_of_list_of_directory(full_path, depth + 1); 
         }
         free(full_path);
     }
